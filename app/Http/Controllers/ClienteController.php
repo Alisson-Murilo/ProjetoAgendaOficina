@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Models\Cliente;
 use Illuminate\Http\Request;
 
 class ClienteController extends Controller
@@ -11,7 +11,8 @@ class ClienteController extends Controller
      */
     public function index()
     {
-        //
+        $clientes = Cliente::all();
+        return view('cliente.index', compact('clientes'));
     }
 
     /**
@@ -19,7 +20,7 @@ class ClienteController extends Controller
      */
     public function create()
     {
-        //
+        return view('cliente.create');
     }
 
     /**
@@ -27,7 +28,8 @@ class ClienteController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Cliente::create($request->all());
+        return redirect()->route('cliente.index');
     }
 
     /**
