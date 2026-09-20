@@ -27,15 +27,25 @@
 
             <tbody>
                 @foreach($clientes as $c)
-                <tr>
-                    <td>{{ $c->id }}</td>
-                    <td>{{ $c->nome }}</td>
-                    <td>{{ $c->telefone }}</td>
-                    <td class="d-flex gap-2">
-                        <a href="/cliente/{{ $c->id }}/edit" class="btn btn-sm btn-warning">Editar</a>
-                        <a href="/cliente/{{ $c->id }}" class="btn btn-sm btn-info">Consultar</a>
-                    </td>
-                </tr>
+                    <tr>
+                        <td>{{ $c->id }}</td>
+                        <td>{{ $c->nome }}</td>
+                        <td>{{ $c->telefone }}</td>
+                        <td class="d-flex gap-2">
+                            <a href="/cliente/{{ $c->id }}/edit" class="btn btn-sm btn-warning">Editar</a>
+                            <a href="/cliente/{{ $c->id }}" class="btn btn-sm btn-info">Consultar</a>
+
+                            <form action="/cliente/{{ $c->id }}" method="post">
+                                @csrf
+                                @method('DELETE')
+
+                                <button type="submit" class="btn btn-sm btn-danger"
+                                    onclick="return confirm('Tem certeza que deseja excluir este cliente?')">
+                                    Excluir
+                                </button>
+                            </form>
+                        </td>
+                    </tr>
                 @endforeach
             </tbody>
         </table>
