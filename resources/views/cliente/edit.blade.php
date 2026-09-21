@@ -24,8 +24,7 @@
 
             <div class="mb-3">
                 <label for="telefone" class="form-label">Telefone</label>
-                <input type="text" id="telefone" name="telefone" class="form-control" value="{{ $cliente->telefone }}"
-                    required="">
+                <input type="text" id="telefone" name="telefone" class="form-control" value="{{ $cliente->telefone }}" required="">
             </div>
 
             <button type="submit" class="btn btn-primary">Salvar</button>

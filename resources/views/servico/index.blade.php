@@ -30,7 +30,7 @@
                     <tr>
                         <td>{{ $s->id }}</td>
                         <td>{{ $s->nome }}</td>
-                        <td>R$ {{ $s->preco }},00</td>
+                        <td>R$ {{ $s->preco }}</td>
                         <td class="d-flex gap-2">
                             <a href="/servico/{{ $s->id }}/edit" class="btn btn-sm btn-warning">Editar</a>
                             <a href="/servico/{{ $s->id }}" class="btn btn-sm btn-info">Consultar</a>

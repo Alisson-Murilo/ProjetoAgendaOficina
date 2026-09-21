@@ -10,6 +10,8 @@ class Agendamento extends Model
 
     public $incrementing = true;
 
+    public $timestamps = false;
+
     protected $fillable = [
         'moto_id',
         'servico_id',

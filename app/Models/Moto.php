@@ -10,6 +10,8 @@ class Moto extends Model
 
     public $incrementing = true;
 
+    public $timestamps = false;
+
     protected $fillable = [
         'cliente_id',
         'marca',

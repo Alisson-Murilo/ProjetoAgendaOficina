@@ -21,7 +21,7 @@ class ServicoController extends Controller
      */
     public function create()
     {
-        //
+        return view('servico.create');
     }
 
     /**
@@ -29,38 +29,45 @@ class ServicoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Servico::create($request->all());
+        return redirect()->route('servico.index');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Servico $servico)
+    public function show(string $id)
     {
-        //
+        $servico = Servico::findOrFail($id);
+        return view('servico.show', compact('servico'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Servico $servico)
+    public function edit(string $id)
     {
-        //
+        $servico = Servico::findOrFail($id);
+        return view('servico.edit', compact('servico'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Servico $servico)
+    public function update(Request $request, string $id)
     {
-        //
+        $servico = Servico::findOrFail($id);
+        $servico->update($request->all());
+        return redirect()->route('servico.index');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Servico $servico)
+    public function destroy(string $id)
     {
-        //
+        $servico = Servico::findOrFail($id);
+        $servico->delete();
+        return redirect()->route('servico.index');
     }
 }
