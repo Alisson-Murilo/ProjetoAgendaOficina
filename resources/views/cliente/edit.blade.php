@@ -6,6 +6,9 @@
 
 <div class="page-header">
     <h1 class="h3 mb-0">Editar Cadastro</h1>
+    <a href="{{ route('cliente.index') }}" class="btn btn-outline-secondary">
+        <i class="bi bi-arrow-left"></i> Voltar
+    </a>
 </div>
 
 <div class="card page-card">
