@@ -6,9 +6,14 @@
  
 <div class="page-header">
     <h1 class="h3 mb-0"><i class="bi bi-calendar2-check-fill text-danger"></i> Agendamentos</h1>
-    <a href="{{ route('agendamento.create') }}" class="btn btn-danger">
-        <i class="bi bi-plus-circle"></i> Novo Agendamento
-    </a>
+    <div class="d-flex gap-2">
+        <a href="{{ route('home') }}" class="btn btn-outline-secondary">
+            <i class="bi bi-arrow-left"></i> Voltar
+        </a>
+        <a href="{{ route('agendamento.create') }}" class="btn btn-danger">
+            <i class="bi bi-plus-circle"></i> Novo Agendamento
+        </a>
+    </div>
 </div>
  
 <div class="card page-card">

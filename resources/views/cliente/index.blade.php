@@ -6,9 +6,14 @@
  
 <div class="page-header">
     <h1 class="h3 mb-0"><i class="bi bi-people-fill text-primary"></i> Clientes</h1>
-    <a href="{{ route('cliente.create') }}" class="btn btn-primary">
-        <i class="bi bi-plus-circle"></i> Novo Cliente
-    </a>
+    <div class="d-flex gap-2">
+        <a href="{{ route('home') }}" class="btn btn-outline-secondary">
+            <i class="bi bi-arrow-left"></i> Voltar
+        </a>
+        <a href="{{ route('cliente.create') }}" class="btn btn-primary">
+            <i class="bi bi-plus-circle"></i> Novo Cliente
+        </a>
+    </div>
 </div>
  
 <div class="card page-card">

@@ -6,9 +6,14 @@
  
 <div class="page-header">
     <h1 class="h3 mb-0"><i class="bi bi-tools text-warning"></i> Serviços</h1>
-    <a href="{{ route('servico.create') }}" class="btn btn-warning text-white">
-        <i class="bi bi-plus-circle"></i> Novo Serviço
-    </a>
+    <div class="d-flex gap-2">
+        <a href="{{ route('home') }}" class="btn btn-outline-secondary">
+            <i class="bi bi-arrow-left"></i> Voltar
+        </a>
+        <a href="{{ route('servico.create') }}" class="btn btn-warning text-white">
+            <i class="bi bi-plus-circle"></i> Novo Serviço
+        </a>
+    </div>
 </div>
  
 <div class="card page-card">

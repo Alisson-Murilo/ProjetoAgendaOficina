@@ -6,9 +6,14 @@
  
 <div class="page-header">
     <h1 class="h3 mb-0"><i class="fa-solid fa-motorcycle text-success"></i> Motos</h1>
-    <a href="{{ route('moto.create') }}" class="btn btn-success">
-        <i class="bi bi-plus-circle"></i> Nova Moto
-    </a>
+    <div class="d-flex gap-2">
+        <a href="{{ route('home') }}" class="btn btn-outline-secondary">
+            <i class="bi bi-arrow-left"></i> Voltar
+        </a>
+        <a href="{{ route('moto.create') }}" class="btn btn-success">
+            <i class="bi bi-plus-circle"></i> Nova Moto
+        </a>
+    </div>
 </div>
  
 <div class="card page-card">
