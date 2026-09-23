@@ -8,7 +8,7 @@ use App\Http\Controllers\ServicoController;
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('home');
 
 Route::resource('cliente', ClienteController::class);
 
