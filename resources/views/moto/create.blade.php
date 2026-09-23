@@ -1,16 +1,19 @@
-<!doctype html>
-<html lang="pt-BR">
+@extends('layouts.app')
+ 
+@section('title', 'Nova Moto')
+ 
+@section('content')
+ 
+<div class="page-header">
+    <h1 class="h3 mb-0"><i class="fa-solid fa-motorcycle text-success"></i> Nova Moto</h1>
+    <a href="{{ route('moto.index') }}" class="btn btn-outline-secondary">
+        <i class="bi bi-arrow-left"></i> Voltar
+    </a>
+</div>
+ 
+<div class="card page-card">
+    <div class="card-body">
 
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Cadastro de Motos</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-</head>
-
-<body>
-    <div class="container py-3">
-        <h1>Cadastro de Motos</h1>
         <form method="post" action="/moto">
             @CSRF
             <div class="mb-3">
@@ -37,6 +40,6 @@
         </form>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js" integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO" crossorigin="anonymous"></script>
     </div>
-</body>
-
-</html>
+</div>
+ 
+@endsection

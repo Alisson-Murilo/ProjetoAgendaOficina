@@ -1,21 +1,21 @@
-<!doctype html>
-<html lang="pt-BR">
+@extends('layouts.app')
+ 
+@section('title', 'Motos')
+ 
+@section('content')
+ 
+<div class="page-header">
+    <h1 class="h3 mb-0"><i class="fa-solid fa-motorcycle text-success"></i> Motos</h1>
+    <a href="{{ route('moto.create') }}" class="btn btn-success">
+        <i class="bi bi-plus-circle"></i> Nova Moto
+    </a>
+</div>
+ 
+<div class="card page-card">
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-hover align-middle mb-0">
 
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Registros de Motos</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-</head>
-
-<body>
-    <div class="container py-3">
-
-        <h2>Registros de Motos</h2>
-
-        <a href="/moto/create" class="btn btn-success mb-3">Novo Registro</a>
-
-        <table class="table table-hover table-striped">
             <thead>
                 <tr>
                     <th>ID</th>
@@ -52,10 +52,9 @@
                     </tr>
                 @endforeach
             </tbody>
-        </table>
-
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"></script>
+            </table>
+        </div>
     </div>
-</body>
-
-</html>
+</div>
+ 
+@endsection
