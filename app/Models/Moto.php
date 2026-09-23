@@ -18,4 +18,8 @@ class Moto extends Model
         'modelo',
         'placa'
     ];
+
+    public function cliente(){
+        return $this->belongsTo(Cliente::class, 'cliente_id');
+    }
 }
