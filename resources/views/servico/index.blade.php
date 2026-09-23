@@ -1,21 +1,21 @@
-<!doctype html>
-<html lang="pt-BR">
+@extends('layouts.app')
+ 
+@section('title', 'Serviços')
+ 
+@section('content')
+ 
+<div class="page-header">
+    <h1 class="h3 mb-0"><i class="bi bi-tools text-warning"></i> Serviços</h1>
+    <a href="{{ route('servico.create') }}" class="btn btn-warning text-white">
+        <i class="bi bi-plus-circle"></i> Novo Serviço
+    </a>
+</div>
+ 
+<div class="card page-card">
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-hover align-middle mb-0">
 
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Registros de Serviços</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-</head>
-
-<body>
-    <div class="container py-3">
-
-        <h2>Registros de Serviços</h2>
-
-        <a href="/servico/create" class="btn btn-success mb-3">Novo Registro</a>
-
-        <table class="table table-hover table-striped">
             <thead>
                 <tr>
                     <th>ID</th>
@@ -48,10 +48,9 @@
                     </tr>
                 @endforeach
             </tbody>
-        </table>
-
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"></script>
+            </table>
+        </div>
     </div>
-</body>
-
-</html>
+</div>
+ 
+@endsection

@@ -1,17 +1,19 @@
-<!doctype html>
-<html lang="pt-BR">
+@extends('layouts.app')
+ 
+@section('title', 'Novo Serviço')
+ 
+@section('content')
+ 
+<div class="page-header">
+    <h1 class="h3 mb-0"><i class="bi bi-tools text-warning"></i> Novo Serviço</h1>
+    <a href="{{ route('servico.index') }}" class="btn btn-outline-secondary">
+        <i class="bi bi-arrow-left"></i> Voltar
+    </a>
+</div>
+ 
+<div class="card page-card">
+    <div class="card-body">
 
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Cadastro de Serviço</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-</head>
-
-<body>
-    <div class="container py-3">
-
-        <h1>Cadastro de Serviço</h1>
 
         <form action="/servico" method="post">
             @csrf
@@ -32,6 +34,6 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"></script>
 
     </div>
-</body>
-
-</html>
+</div>
+ 
+@endsection

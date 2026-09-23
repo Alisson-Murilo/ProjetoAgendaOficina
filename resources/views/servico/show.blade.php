@@ -1,17 +1,19 @@
-<!doctype html>
-<html lang="pt-BR">
+@extends('layouts.app')
+ 
+@section('title', 'Detalhes do Serviço')
+ 
+@section('content')
+ 
+<div class="page-header">
+    <h1 class="h3 mb-0"><i class="bi bi-tools text-warning"></i> Detalhes do Serviço</h1>
+    <a href="{{ route('servico.index') }}" class="btn btn-outline-secondary">
+        <i class="bi bi-arrow-left"></i> Voltar
+    </a>
+</div>
+ 
+<div class="card page-card">
+    <div class="card-body">
 
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Consulta de Serviços</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-</head>
-
-<body>
-    <div class="container py-3">
-
-        <h1>Consulta de Serviços</h1>
 
         <div class="mb-3">
             <label class="form-label">ID</label>
@@ -28,9 +30,7 @@
             <input type="text" class="form-control" value="{{ $servico->preco }}" disabled>
         </div>
 
-        <a href="{{ route('servico.index') }}" class="btn btn-secondary">Voltar</a>
-
     </div>
-</body>
-
-</html>
+</div>
+ 
+@endsection
