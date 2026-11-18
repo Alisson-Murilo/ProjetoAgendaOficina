@@ -19,12 +19,12 @@
 <div class="card page-card">
     <div class="card-body">
         <div class="d-flex flex-wrap gap-2 mb-3 small">
-            <span class="badge" style="background:#0d6efd">Agendado</span>
-            <span class="badge" style="background:#20c997">Confirmado</span>
-            <span class="badge" style="background:#fd7e14">Em andamento</span>
-            <span class="badge" style="background:#198754">Concluído</span>
-            <span class="badge" style="background:#dc3545">Cancelado</span>
-            <span class="badge" style="background:#6c757d">Não compareceu</span>
+            <span class="badge" style="background:#3d6b99">Agendado</span>
+            <span class="badge" style="background:#2a7f8f">Confirmado</span>
+            <span class="badge" style="background:#e9a23b; color:#1d2125">Em andamento</span>
+            <span class="badge" style="background:#4c8c4a">Concluído</span>
+            <span class="badge" style="background:#b3392c">Cancelado</span>
+            <span class="badge" style="background:#7b8794">Não compareceu</span>
         </div>
         <div id="calendario"></div>
     </div>

@@ -8,66 +8,19 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/all.min.css" rel="stylesheet">
-    <style>
-        body {
-            background-color: #f4f6f8;
-        }
-
-        .navbar-brand i {
-            margin-right: .4rem;
-        }
-
-        .page-header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            flex-wrap: wrap;
-            gap: .75rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .page-card {
-            border: none;
-            border-radius: 1rem;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
-        }
-
-        .card-cta {
-            border: none;
-            border-radius: 1rem;
-            transition: transform 0.15s ease, box-shadow 0.15s ease;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
-        }
-
-        .card-cta:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-        }
-
-        .card-cta .icon-wrap {
-            width: 56px;
-            height: 56px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-        }
-
-        .table-actions a,
-        .table-actions button {
-            margin-right: .25rem;
-        }
-    </style>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600&family=Barlow+Condensed:wght@600;700&display=swap" rel="stylesheet">
+    <link href="{{ asset('css/oficina.css') }}" rel="stylesheet">
     @yield('styles')
 </head>
 
 <body>
 
-    <nav class="navbar navbar-dark bg-dark navbar-expand-lg mb-4">
+    <nav class="navbar navbar-dark navbar-expand-lg app-navbar mb-4">
         <div class="container">
             <a class="navbar-brand" href="{{ route('home') }}">
-                <i class="bi bi-wrench-adjustable-circle-fill"></i>Oficina de Motos
+                <i class="fa-solid fa-motorcycle"></i>Oficina<span>Motos</span>
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
                 <span class="navbar-toggler-icon"></span>

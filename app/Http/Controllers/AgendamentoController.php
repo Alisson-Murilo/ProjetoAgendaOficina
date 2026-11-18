@@ -96,12 +96,12 @@ class AgendamentoController extends Controller
     public function eventos()
     {
         $cores = [
-            'agendado'       => '#0d6efd',
-            'confirmado'     => '#20c997',
-            'em_andamento'   => '#fd7e14',
-            'concluido'      => '#198754',
-            'cancelado'      => '#dc3545',
-            'nao_compareceu' => '#6c757d',
+            'agendado'       => '#3d6b99',
+            'confirmado'     => '#2a7f8f',
+            'em_andamento'   => '#e9a23b',
+            'concluido'      => '#4c8c4a',
+            'cancelado'      => '#b3392c',
+            'nao_compareceu' => '#7b8794',
         ];
 
         $eventos = Agendamento::with('moto.cliente', 'servico')->get()->map(function ($a) use ($cores) {
