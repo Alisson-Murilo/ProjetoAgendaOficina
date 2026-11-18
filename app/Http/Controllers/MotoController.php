@@ -5,72 +5,79 @@ namespace App\Http\Controllers;
 use App\Models\Cliente;
 use App\Models\Moto;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class MotoController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+    private function regras(?Moto $moto = null): array
     {
-        $motos = Moto::with('cliente')->get();
+        return [
+            'cliente_id' => 'required|exists:clientes,id',
+            'marca'      => 'required|string|max:50',
+            'modelo'     => 'required|string|max:50',
+            'placa'      => ['required', 'string', 'max:10', Rule::unique('motos', 'placa')->ignore($moto?->id)],
+        ];
+    }
+
+    public function index(Request $request)
+    {
+        $motos = Moto::with('cliente')
+            ->when($request->q, fn($q, $t) => $q->where(
+                fn($w) => $w->where('placa', 'like', "%{$t}%")
+                    ->orWhere('marca', 'like', "%{$t}%")
+                    ->orWhere('modelo', 'like', "%{$t}%")
+                    ->orWhereHas('cliente', fn($c) => $c->where('nome', 'like', "%{$t}%"))
+            ))
+            ->orderBy('modelo')
+            ->paginate(10)
+            ->withQueryString();
+
         return view('moto.index', compact('motos'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
-        $clientes = Cliente::all();
-        return view('moto.create', compact('clientes'));
+        $clientes = Cliente::orderBy('nome')->get();
+
+        return view('moto.form', compact('clientes'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
-        Moto::create($request->all());
-        return redirect()->route('moto.index');
+        $dados = $request->validate($this->regras());
+        $dados['placa'] = strtoupper($dados['placa']);
+
+        Moto::create($dados);
+
+        return redirect()->route('moto.index')->with('success', 'Moto cadastrada com sucesso.');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
+    public function show(Moto $moto)
     {
-        $moto = Moto::findOrFail($id);
         return view('moto.show', compact('moto'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
+    public function edit(Moto $moto)
     {
-        $moto = Moto::findOrFail($id);
-        $clientes = Cliente::all();
-        return view('moto.edit', compact('moto', 'clientes'));
+        $clientes = Cliente::orderBy('nome')->get();
+
+        return view('moto.form', compact('moto', 'clientes'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Moto $moto)
     {
-        $moto = Moto::findOrFail($id);
-        $moto->update($request->all());
-        return redirect()->route('moto.index');
+        $dados = $request->validate($this->regras($moto));
+        $dados['placa'] = strtoupper($dados['placa']);
+
+        $moto->update($dados);
+
+        return redirect()->route('moto.index')->with('success', 'Moto atualizada com sucesso.');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
+    public function destroy(Moto $moto)
     {
-        $moto = Moto::findOrFail($id);
         $moto->delete();
-        return redirect()->route('moto.index');
+
+        return redirect()->route('moto.index')->with('success', 'Moto excluída com sucesso.');
     }
 }

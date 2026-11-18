@@ -7,67 +7,58 @@ use Illuminate\Http\Request;
 
 class ServicoController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+    private function regras(): array
     {
-        $servicos = Servico::all();
+        return [
+            'nome'  => 'required|string|max:100',
+            'preco' => 'required|numeric|min:0',
+        ];
+    }
+
+    public function index(Request $request)
+    {
+        $servicos = Servico::query()
+            ->when($request->q, fn($q, $t) => $q->where('nome', 'like', "%{$t}%"))
+            ->orderBy('nome')
+            ->paginate(10)
+            ->withQueryString();
+
         return view('servico.index', compact('servicos'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
-        return view('servico.create');
+        return view('servico.form');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
-        Servico::create($request->all());
-        return redirect()->route('servico.index');
+        Servico::create($request->validate($this->regras()));
+
+        return redirect()->route('servico.index')->with('success', 'Serviço cadastrado com sucesso.');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
+    public function show(Servico $servico)
     {
-        $servico = Servico::findOrFail($id);
         return view('servico.show', compact('servico'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
+    public function edit(Servico $servico)
     {
-        $servico = Servico::findOrFail($id);
-        return view('servico.edit', compact('servico'));
+        return view('servico.form', compact('servico'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Servico $servico)
     {
-        $servico = Servico::findOrFail($id);
-        $servico->update($request->all());
-        return redirect()->route('servico.index');
+        $servico->update($request->validate($this->regras()));
+
+        return redirect()->route('servico.index')->with('success', 'Serviço atualizado com sucesso.');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
+    public function destroy(Servico $servico)
     {
-        $servico = Servico::findOrFail($id);
         $servico->delete();
-        return redirect()->route('servico.index');
+
+        return redirect()->route('servico.index')->with('success', 'Serviço excluído com sucesso.');
     }
 }

@@ -1,78 +1,72 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Models\Cliente;
+use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 
 class ClienteController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+    private function regras(): array
     {
-        $clientes = Cliente::all();
+        return [
+            'nome'     => 'required|string|max:100',
+            'telefone' => 'required|string|max:20',
+        ];
+    }
+
+    public function index(Request $request)
+    {
+        $clientes = Cliente::query()
+            ->when($request->q, fn($q, $t) => $q->where(
+                fn($w) => $w->where('nome', 'like', "%{$t}%")->orWhere('telefone', 'like', "%{$t}%")
+            ))
+            ->orderBy('nome')
+            ->paginate(10)
+            ->withQueryString();
+
         return view('cliente.index', compact('clientes'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
-        return view('cliente.create');
+        return view('cliente.form');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
-        Cliente::create($request->all());
-        return redirect()->route('cliente.index');
+        Cliente::create($request->validate($this->regras()));
+
+        return redirect()->route('cliente.index')->with('success', 'Cliente cadastrado com sucesso.');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
+    public function show(Cliente $cliente)
     {
-        $cliente = Cliente::findOrFail($id);
-
         return view('cliente.show', compact('cliente'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
+    public function edit(Cliente $cliente)
     {
-        $cliente = Cliente::findOrFail($id);
-
-        return view('cliente.edit', compact('cliente'));
+        return view('cliente.form', compact('cliente'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Cliente $cliente)
     {
-        $cliente = Cliente::findOrFail($id);
+        $cliente->update($request->validate($this->regras()));
 
-        $cliente->update($request->all());
-
-        return redirect()->route('cliente.index');
+        return redirect()->route('cliente.index')->with('success', 'Cliente atualizado com sucesso.');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
+    public function destroy(Cliente $cliente)
     {
-        $cliente = Cliente::findOrFail($id);
+        try {
+            $cliente->delete();
+        } catch (QueryException $e) {
+            return redirect()->route('cliente.index')
+                ->withErrors('Não foi possível excluir: há registros vinculados a este cliente.');
+        }
 
-        $cliente->delete();
-
-        return redirect()->route('cliente.index');
+        return redirect()->route('cliente.index')->with('success', 'Cliente excluído com sucesso.');
     }
 }
